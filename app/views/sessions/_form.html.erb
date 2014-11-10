@@ -1,0 +1,23 @@
+<h2>Sessions</h2>
+
+
+<form action="/session" method="post">
+  <input type="hidden" name="_method" value="post">
+
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+  <label for="session_user_name">User name</label>
+
+  <input name="session[user_name]" id="session_user_name" type="text">
+  <br>
+  <label for="session_password">User password</label>
+
+  <input name="session[password]" id="session_password" type="text">
+  <br>
+
+  <input type="submit" value="Sign in">
+
+</form>

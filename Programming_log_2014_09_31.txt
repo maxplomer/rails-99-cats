@@ -1,0 +1,81 @@
+
+-  should change user migration so that session_token IS NOT NULL
+
+
+- We are now going to test our Session through the browser
+
+
+- manually create user
+
+rails c
+
+u = User.new
+
+u.password = "hello1"
+
+u.user_name = "jim"
+
+u.save!
+
+exit
+
+
+
+-  output text to server window while debugging
+
+logger.info "HELLO"
+
+
+
+
+-  need cats with owners and then attempt to edit or update
+
+  jim 2 should not be able to edit mr wiggles
+
+rails c
+
+cat_attributes = {
+  color: "invisible",
+  name: "Mr. Wiggles",
+  sex: "F",
+  description: "Mr. Wiggles is watching you at all times",
+  birth_date: "01/03/2010",
+  user_id: 1
+}
+Cat.create!(cat_attributes)
+
+
+cat_attributes = {
+  color: "visible",
+  name: "Mr. Giggles",
+  sex: "F",
+  description: "Mr. Wiggles is blind",
+  birth_date: "01/03/2010",
+  user_id: 2
+}
+Cat.create!(cat_attributes)
+
+u = User.new
+u.password = "hello1"
+u.user_name = "jim"
+u.save!
+
+u = User.new
+u.password = "hello2"
+u.user_name = "jim2"
+u.save!
+
+
+
+
+
+
+helpful linkes
+
+http://apidock.com/rails/ActiveRecord/ConnectionAdapters/SchemaStatements/add_index
+
+https://docwhat.org/undoing-a-rails-generate/
+
+http://git-scm.com/book/en/Git-Branching-Branch-Management
+
+http://stackoverflow.com/questions/10301794/difference-between-rake-dbmigrate-dbreset-and-dbschemaload

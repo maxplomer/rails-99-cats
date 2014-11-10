@@ -1,0 +1,303 @@
+######################################################
+"First, follow the setup instructions in Rails setup!"
+
+
+$ rails _4.0.2_ new ninety_nine_cats --database postgresql
+
+
+config/database.yml by adding username: appacademy and host: localhost
+
+When using postgresql, you should also run the command
+
+$ rake db:create:all
+
+add .DS_Store to .gitignore (i forget the other mac folder file)
+
+in the terminal before trying to run migrations
+
+# Add to Gemfile
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'quiet_assets'
+end
+
+commit -m "initial rails setups"
+
+comment out authenticity token in Actioncontroller
+
+######################################################
+Phase 1: Cat
+Model
+
+things to do:
+-  rails migrations
+
+$ rails generate migration CreateCat
+$ rake db:migrate
+
+-  add the timeliness validation to migration of cat
+
+# in Gemfile
+gem 'validates_timeliness', '~> 3.0'
+
+# Run bundler
+$ bundle install
+Then run
+
+$ rails generate validates_timeliness:install
+
+-  another migration to change birthday to t.date
+
+$ rails generate migration ChangeBirthDayType
+$ rake db:migrate
+
+
+-  rails new controller
+
+$ rails generate controller Cats
+
+-  make the controller methods
+
+
+-  fillout routes file
+
+
+$ git commit -m "doing Phase 1/indexshow pages, still need to add Cat model, and doing views for index and show methods of Cat controller"
+
+
+
+
+
+- rake routes
+
+
+
+######################################################
+Phase 1: Cat
+Index/show pages
+
+
+
+- put cats in the data base
+
+$ rails c
+cat_attributes = {
+  color: "invisible",
+  name: "Mr. Wiggles",
+  sex: "F",
+  description: "Mr. Wiggles is watching you at all times",
+  birth_date: "01/03/2010"
+}
+Cat.create!(cat_attributes)
+
+cat_attributes = {
+  color: "blue",
+  name: "Misty",
+  sex: "M",
+  description: "I hate Mr. Wiggles",
+  birth_date: "01/03/1010"
+}
+Cat.create!(cat_attributes)
+
+$ rails s
+
+goto: http://localhost:3000/cats
+
+
+
+
+-  going to test show cat by going to
+
+http://localhost:3000/cats/1
+
+
+
+######################################################
+Phase 1: Cat
+New Form
+
+
+-  Build a new form page to create a new Cat:
+
+  add route
+
+  add method in controller
+
+  add view new.html.erb
+
+
+-  Finished def create in cats_controller.rb
+
+   need to validate that we can create new cat
+
+   send Post command with hash for new cat
+
+
+
+
+######################################################
+Phase 2: CatRentalRequest
+Build out the model
+
+
+-  Make a CatRentalRequest model.
+   Tracks cat_id, start_date, end_date.
+
+  topics to cover:
+
+migration,
+rails controller ,
+associations,
+model file,
+routes
+
+
+
+$ rails generate migration CreateCatRentalRequest
+
+
+
+- make a new CatRentalRequest
+
+$ rails console
+
+hash = {
+  cat_id: 1,
+  start_date: "2014-01-01",
+  end_date: "2014-02-01"
+}
+x = CatRentalRequest.new(hash)
+x.save!
+CatRentalRequest.all
+x.overlapping_requests
+
+- make more new CatRentalRequest
+
+hash = {
+  cat_id: 1,
+  start_date: "2014-01-02",
+  end_date: "2014-02-01"
+}
+CatRentalRequest.new(hash).save!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+useful links:
+
+https://github.com/appacademy/rails-curriculum/blob/master/rails-setup.md
+
+https://github.com/adzap/validates_timeliness
+
+http://stackoverflow.com/questions/646951/singular-or-plural-controller-and-helper-names-in-rails
+
+https://github.com/appacademy/sql-curriculum
+
+https://github.com/zakstal/router
+
+http://apidock.com/rails/ActiveRecord/ConnectionAdapters/SchemaStatements/add_column
+
+https://github.com/appacademy/sql-curriculum/blob/master/w3d3/migrations.md
+
+http://apidock.com/rails/ActiveRecord/ConnectionAdapters/SchemaStatements/change_column
+
+http://guides.rubyonrails.org/migrations.html
+
+http://stackoverflow.com/questions/2799774/rails-migration-for-change-column
+
+https://github.com/adzap/validates_timeliness
+
+http://guides.rubyonrails.org/active_record_validations.html
+
+http://stackoverflow.com/questions/2529990/activerecord-date-format
+
+http://www.w3schools.com/tags/tag_th.asp
+
+http://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
+
+http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html
+
+http://stackoverflow.com/questions/6982692/html5-input-type-date-default-value-to-today
+
+http://stackoverflow.com/questions/1543171/how-can-i-output-leading-zeros-in-ruby
+
+http://www.w3schools.com/tags/att_input_checked.asp
+
+http://www.w3schools.com/tags/tryit.asp?filename=tryhtml_input_checked
+
+http://guides.rubyonrails.org/layouts_and_rendering.html
+
+http://apidock.com/rails/ActiveRecord/ConnectionAdapters/SchemaStatements/add_index
+
+http://edgeguides.rubyonrails.org/active_record_validations.html
+
+http://stackoverflow.com/questions/6167994/assigning-default-value-while-creating-migration-file
+
+http://api.rubyonrails.org/classes/ActiveRecord/Querying.html#method-i-find_by_sql
+
+http://edgeguides.rubyonrails.org/active_record_validations.html

@@ -1,0 +1,5 @@
+-  change PENDING cat rental to APPROVED
+
+x = CatRentalRequest.find(1)
+x.status = "APPROVED"
+x.save!

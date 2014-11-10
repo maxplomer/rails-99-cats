@@ -1,0 +1,73 @@
+<h2>Cat form!</h2>
+
+<% if @cat.id.nil?%>
+  <% action_field = "/cats" %>
+  <% value_field = "post" %>
+<% else %>
+  <% action_field = cat_url(@cat) %>
+  <% value_field = "patch"%>
+<% end %>
+
+<form action="<%= action_field %>" method="post">
+  <input type="hidden" name="_method" value="<%= value_field %>">
+
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+  <!-- label's `for` attribute connects with the input's `id` attribute-->
+  <label for="cat_name">First name</label>
+  <!-- input name `cat[name]` means that Rails will nest the `name` attribute
+       inside a `cat` hash: `{ :cat => { :name => "gizmo" } }` -->
+  <input name="cat[name]" id="cat_name" type="text" value="<%= @cat.description %>">
+  <br>
+
+  <!-- this label isn't for anything specific -->
+  <label>Sex</label>
+  <div>
+    <!-- note that both radio buttons have the name `cat[sex]`; that's how
+         they are related -->
+    <input name="cat[sex]" id="cat_sex_m" type="radio" value="M" <%= "checked" if @cat.sex == "M" %>>
+    <label for="cat_sex_m">Male</label>
+    <input name="cat[sex]" id="cat_sex_f" type="radio" value="F" <%= "checked" if @cat.sex == "F" %>>
+    <label for="cat_sex_f">Female</label>
+  </div>
+  <br>
+
+  <label for="cat_description">description</label>
+  <textarea name="cat[description]" id="cat_description"><%= @cat.description %></textarea>
+  <br>
+
+  <label for="color">Coat color</label>
+  <!-- dropdown -->
+  <select name="cat[color]">
+    <!-- `brown` is the value that will be submitted to the server; user is
+         displayed "Brown" as the choice -->
+      <option  value="blank"></option>
+
+    <option value="brown" <%= "selected" if @cat.color == "brown" %>>Brown</option>
+    <option value="black" <%= "selected" if @cat.color == "black" %>>Black</option>
+    <option value="blue" <%= "selected" if @cat.color == "blue" %>>Blue</option>
+
+  </select>
+  <br>
+
+  <label for="cat_birth_date">Birth date</label>
+  <!-- click on the date will launch a date picker -->
+
+  <% year = @cat.birth_date.year.to_s.rjust(4, "0") %>
+  <% month = @cat.birth_date.month.to_s.rjust(2, "0") %>
+  <% day = @cat.birth_date.day.to_s.rjust(2, "0") %>
+
+  <input name="cat[birth_date]" id="cat_birth_date" type="date"
+  value="<%= "#{year}-#{month}-#{day}" %>"></input>
+
+  <input type="submit" value="Build my cat!">
+
+  <!--
+    Other uncovered input types:
+    hidden field
+    check box
+    -->
+</form>

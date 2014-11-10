@@ -1,0 +1,23 @@
+<h1>Make a new Request</h2>
+<% rental = @CatRentalRequest %>
+  <form action="/cat_requests" method="post">
+    <input type="hidden" name="_method" value="post">
+
+    <input
+       name="authenticity_token"
+       type="hidden"
+       value="<%= form_authenticity_token %>">
+
+    <label for="cat_name">Cat ID</label>
+      <input name="rental[cat_id]" id="cat_name" type="text" value="id">
+
+    <label>Enter your dates</label>
+    <label for="cat_start_date">Start date</label>
+      <input name="rental[start_date]" id="cat_start_date" type="date">
+
+      <br>
+    <label for="cat_end_date">End date</label>
+        <input name="rental[end_date]" id="cat_end_date" type="date">
+
+      <input type="submit" value="Submit Reuquest!">
+  </form>

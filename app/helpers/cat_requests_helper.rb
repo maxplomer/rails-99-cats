@@ -1,0 +1,2 @@
+module CatRequestsHelper
+end

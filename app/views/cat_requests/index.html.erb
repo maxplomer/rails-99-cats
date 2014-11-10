@@ -1,0 +1,22 @@
+<h1>Here are the cat requests</h1>
+<ul>
+  <table>
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Status</th>
+    </tr>
+    <% rentals = @rental %>
+
+      <% if !rentals.nil? %>
+        <% rentals.each do |cat|%>
+      <tr>
+        <td><%= cat.start_date %></td>
+        <td><%= cat.end_date %></td>
+        <td><%= cat.status %></td>
+      </tr>
+    <% end %>
+  <% end  %>
+  </table>
+</ul>
+<%= link_to "All Cats", cats_url %>

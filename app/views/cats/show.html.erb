@@ -1,0 +1,64 @@
+<h1>your cat</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Birth date</th>
+    <th>Color</th>
+    <th>Sex</th>
+    <th>Description</th>
+    <th>Created_at</th>
+    <th>Updated_at</th>
+  </tr>
+  <tr>
+    <td><%= @cat.name %></td>
+    <td><%= @cat.birth_date %></td>
+    <td><%= @cat.color %></td>
+    <td><%= @cat.sex %></td>
+    <td><%= @cat.description %></td>
+    <td><%= @cat.created_at %></td>
+    <td><%= @cat.updated_at %></td>
+  </tr>
+</table>
+
+<h1>Your cat requests</h1>
+<table>
+ <tr>
+   <th>Request number</th>
+   <th>Approve</th>
+   <th>Deny</th>
+ </tr>
+ <% @cat.requests.each do |request|%>
+  <tr>
+    <td><%= request.id %></td>
+    <td>
+     <form action="<%= cat_request_approve_url(@cat.id)%>" method="post">
+       <input type="hidden" name="_method" value="patch">
+
+       <input
+          name="authenticity_token"
+          type="hidden"
+          value="<%= form_authenticity_token %>">
+      <input type="submit" value="Submit Reuquest!">
+      </form>
+    </td>
+    <td>
+    <form action="<%= cat_request_deny_url(@cat.id)%>" method="post">
+      <input type="hidden" name="_method" value="patch">
+
+      <input
+         name="authenticity_token"
+         type="hidden"
+         value="<%= form_authenticity_token %>">
+     <input type="submit" value="Submit Reuquest!">
+     </form>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<br>
+<br>
+<%= link_to "All Cats", cats_url %>
+<br>
+<br>
+<%= link_to "Edit cat", edit_cat_url %>
